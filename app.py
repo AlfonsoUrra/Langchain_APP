@@ -52,7 +52,7 @@ def handler_userinput(user_question):
     response = st.session_state.conversation({'question': user_question})
     st.session_state.chat_history = response['chat_history']
 
-    for i, message in enumerate(st.session_state.history):
+    for i, message in enumerate(st.session_state.chat_history):
         if i % 2 == 0:
             st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
         else:
@@ -88,10 +88,6 @@ def main():
     user_question = st.text_input("Pregunta cualquier cosa sobre los documentos y trataré de responderte:")
     if user_question:
         handler_userinput(user_question)
-
-
-    st.write(user_template.replace("{{MSG}}", "Hola Terminator"), unsafe_allow_html=True)
-    st.write(bot_template.replace("{{MSG}}", "Hola Alfonso"), unsafe_allow_html=True)
 
 
     with st.sidebar:
