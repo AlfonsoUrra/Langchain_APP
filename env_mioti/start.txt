@@ -1,0 +1,1 @@
+env_mioti/Scripts/python -m streamlit run app.py
