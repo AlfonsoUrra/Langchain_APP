@@ -57,6 +57,13 @@ def handler_userinput(user_question):
             st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
         else:
             st.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
+    
+    if st.button("Descargar conversación"):
+        chat_history = "\n".join(
+            f"Usuario: {message.content}" if i % 2 == 0 else f"Bot: {message.content}"
+            for i, message in enumerate(st.session_state.chat_history)
+        )
+        st.download_button("Descargar conversación", chat_history, "chat_history.txt")
 
 
 
@@ -75,13 +82,13 @@ def main():
     image_path = os.path.join("img", "stack-of-books.png")
 
     # Encabezado principal con imagen de libro
-    col1, col2 = st.columns([1, 9])  # Divide en columnas para la imagen y el texto
-    with col1:
+    col1, col2 = st.columns([7, 1])  # Divide en columnas para la imagen y el texto
+    with col2:
         st.image(
             image_path,  # Ruta relativa de la imagen
             width=50,  # Ancho de la imagen
         )
-    with col2:
+    with col1:
         st.header("Tu Chat de PDFs")
 
 
